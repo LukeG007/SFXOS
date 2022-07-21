@@ -49,7 +49,6 @@ char get_ascii_char(uint8 key_code)
     case KEY_DOT : return '.';
     case KEY_FORESLHASH : return '/';
     case KEY_SPACE : return ' ';
-    case KEY_BACKSPACE : return 'cmd:back';
     default : return 0;
   }
 }
