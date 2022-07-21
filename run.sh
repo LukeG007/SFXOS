@@ -12,8 +12,11 @@ gcc -m32 -c kernel/utils.c -o __temp__/binaries/utils.o -std=gnu99 -ffreestandin
 
 gcc -m32 -c kernel/char.c -o __temp__/binaries/char.o -std=gnu99 -ffreestanding -O1 -Wall -Wextra
 
+gcc -m32 -c kernel/include/stdio.c -o __temp__/binaries/stdio.o -std=gnu99 -ffreestanding -O1 -Wall -Wextra
+
 #linking the kernel with kernel.o and boot.o files
-ld -m elf_i386 -T linker.ld __temp__/binaries/kernel.o __temp__/binaries/utils.o __temp__/binaries/char.o __temp__/binaries/boot.o -o grub/boot/MyOS.bin -nostdlib
+ld -m elf_i386 -T linker.ld __temp__/binaries/stdio.o __temp__/binaries/kernel.o __temp__/binaries/utils.o __temp__/binaries/char.o __temp__/binaries/boot.o -o grub/boot/MyOS.bin -nostdlib
+#__temp__/binaries/stdio.o 
 
 #check MyOS.bin file is x86 multiboot file or not
 grub-file --is-x86-multiboot grub/boot/MyOS.bin
