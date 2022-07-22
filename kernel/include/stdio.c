@@ -85,6 +85,7 @@ void printf(char *argv)
 
 }
 
+//temporary
 void kernel_panic()
 {
   init_vga(WHITE, RED);
@@ -163,10 +164,12 @@ void test_input()
 {
   char ch = 0;
   char keycode = 0;
+  print_string("User ~ MyOS$ ");
   do{
     keycode = get_input_keycode();
     if(keycode == KEY_ENTER){
       print_new_line();
+      print_string("User ~ MyOS$ ");
     //test kernel panic by pressing \ on the keyboard
     }else if (keycode == KEY_BACKSLASH)
     {
