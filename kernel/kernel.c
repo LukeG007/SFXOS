@@ -9,8 +9,10 @@ void kernel_entry()
   printf("this is another line");
   //printf();
   printf("this is seperated by a new line!");
-  print_new_line();
+  printf("and this is another line");
+  print_new_line();  
   test_input();
+  //kernel_panic();
 
 }
 

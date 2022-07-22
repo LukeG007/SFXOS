@@ -6,7 +6,7 @@
 uint32 vga_index;
 uint16* vga_buffer;
 static uint32 next_line_index = 1;
-uint8 g_fore_color = WHITE, g_back_color = BLUE;
+uint8 g_fore_color = WHITE, g_back_color = BLACK;
 int digit_ascii_codes[10] = {0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39};
 
 /*
@@ -79,6 +79,13 @@ void printf(char *argv)
   next_line_index++;
 
 }
+
+void kernel_panic()
+{
+  init_vga(WHITE, RED);
+  printf("END KERNEL PANIC | FATAL SYSTEM ERROR | SYSTEM TERMINATED");
+}
+
 
 void print_new_line()
 {
@@ -155,6 +162,10 @@ void test_input()
     keycode = get_input_keycode();
     if(keycode == KEY_ENTER){
       print_new_line();
+    //test kernel panic by pressing \ on the keyboard
+    }else if (keycode == KEY_BACKSLASH)
+    {
+      kernel_panic();
     }else{
       ch = get_ascii_char(keycode);
       print_char(ch);
