@@ -41,6 +41,11 @@ uint16 vga_entry(unsigned char ch, uint8 fore_color, uint8 back_color)
   return ax;
 }
 
+//uint8 clearVga()
+//{
+//
+//}
+
 
 
 void clear_vga_buffer(uint16 **buffer, uint8 fore_color, uint8 back_color)
@@ -166,7 +171,12 @@ void test_input()
     }else if (keycode == KEY_BACKSLASH)
     {
       kernel_panic();
-    }else{
+    }else if (keycode == KEY_BACKSPACE)
+    {
+      vga_index--;
+      vga_buffer[vga_index] = vga_entry(NULL ,g_fore_color, g_back_color);
+    }
+    else{
       ch = get_ascii_char(keycode);
       print_char(ch);
     }
