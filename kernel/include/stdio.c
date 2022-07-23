@@ -4,6 +4,8 @@
 #include "../char.h"
 
 uint32 vga_index;
+uint32 fileloc_index = 0;
+char *home = "User ~ MyOS$ ";
 uint16* vga_buffer;
 static uint32 next_line_index = 1;
 uint8 g_fore_color = WHITE, g_back_color = BLACK;
@@ -164,20 +166,29 @@ void test_input()
 {
   char ch = 0;
   char keycode = 0;
-  print_string("User ~ MyOS$ ");
+  print_string(home);
+  
   do{
     keycode = get_input_keycode();
     if(keycode == KEY_ENTER){
-      print_new_line();
-      print_string("User ~ MyOS$ ");
+      clear_vga_buffer(&vga_buffer, WHITE, BLACK);
+      print_string(home);
     //test kernel panic by pressing \ on the keyboard
     }else if (keycode == KEY_BACKSLASH)
     {
       kernel_panic();
     }else if (keycode == KEY_BACKSPACE)
     {
-      vga_index--;
-      vga_buffer[vga_index] = vga_entry(NULL ,g_fore_color, g_back_color);
+      //check to make sure you cant delete the User ~ MyOS$ on screen
+      while(home[fileloc_index]){fileloc_index++;}  
+
+      if (vga_index != 13)
+      {
+        vga_index--;
+        vga_buffer[vga_index] = vga_entry(NULL ,g_fore_color, g_back_color);
+      }
+
+      
     }
     else{
       ch = get_ascii_char(keycode);
