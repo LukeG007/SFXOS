@@ -1,4 +1,4 @@
-# MyOS
+# SFXOS
  A basic operating system for learning purpouses
 
 # TODO
