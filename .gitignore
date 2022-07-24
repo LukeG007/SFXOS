@@ -1,3 +1,4 @@
 
-*.bin
-grub/boot/MyOS.bin
+/*.bin
+/grub/boot/MyOS.bin
+/MyOS.iso
